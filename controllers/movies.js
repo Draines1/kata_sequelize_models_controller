@@ -1,18 +1,18 @@
-const { Snacks } = require('../models');
+const { Movies } = require('../models');
 const { layout } = require('../utils');
 
 const list = async (req, res) => {
-    const snacks = await Snacks.findAll();
-    res.render('snacks/list', {
+    const movies = await Movies.findAll();
+    res.render('movies/list', {
         locals: {
-            snacks
+            movies
         },
         ...layout
     });
 };
 
 const showForm = (req, res) => {
-    res.render('snacks/form', {
+    res.render('movies/form', {
         ...layout
     });
 };
@@ -20,15 +20,17 @@ const showForm = (req, res) => {
 const processForm = async (req, res) => {
     const {
         title,
-        category,
-        healthiness
+        genre,
+        year,
+        rating
     } = req.body;
-    const newSnack = await Snacks.create({
+    const newMovie = await Movies.create({
         title,
-        category,
-        healthiness: parseInt(healthiness, 10)
+        genre,
+        year,
+        rating: parseInt(rating, 10)
     });
-    console.log(newSnack);
+    console.log(newMovie);
     res.redirect(req.baseUrl);
 };
 

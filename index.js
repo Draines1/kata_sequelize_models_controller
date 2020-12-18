@@ -7,13 +7,14 @@ const es6Renderer = require('express-es6-template-engine');
 
 const {
     homeRouter,
-    snackRouter
+    snackRouter,
+    movieRouter
 } = require('./routers');
 
 const app = express();
 const server = http.createServer(app);
 
-const PORT = 3000;
+const PORT = 3030;
 const HOST = '0.0.0.0';
 
 const logger = morgan('tiny');
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/', homeRouter);
 app.use('/snacks', snackRouter);
+app.use('/movies', movieRouter);
 
 server.listen(PORT, HOST, () => {
     console.log(`Listening at http://${HOST}:${PORT}`);
